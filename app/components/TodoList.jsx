@@ -8,7 +8,7 @@ var TodoList = React.createClass({
       return todos.map((todo) => {
         return ( // Here we return some jsx. A Todo component for each list item
           // The key is required by React for keeping track of instances of a component
-          <Todo key={todo.id} {...todo}/> // ... pulls out the keys/properties of the todo object (id and text)
+          <Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/> // ... pulls out the keys/properties of the todo object (id and text)
         );
       });
     };
