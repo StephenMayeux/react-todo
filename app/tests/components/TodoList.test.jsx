@@ -28,4 +28,15 @@ describe('TodoList', () => {
 
     expect(todosComponents.length).toBe(todos.length);
   });
+
+  it('should render an empty message if no todos', () => {
+    var todos = [];
+      // We're passing the {todos} data we created above as the value for the todos prop for the TodoList component
+    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+    // Below we have an instance of the todoList, which we are searching in, passed in as the first parameter
+    // and the component we want to find and count
+    var $el = $(ReactDOM.findDOMNode(todoList));
+
+    expect($el.find('.container__message').length).toBe(1);
+  });
 });
