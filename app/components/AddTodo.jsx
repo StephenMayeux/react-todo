@@ -1,15 +1,18 @@
 var React = require('react');
+var {connect} = require('react-redux');
+var actions = require('actions');
 
-var AddTodo = React.createClass({
+export var AddTodo = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
+    var {dispatch} = this.props;
     var todoText = this.refs.todoText.value; // pull the value from the ref and store it in a new variable todoText
 
     if(todoText.length > 0) {
-      this.refs.todoText.value = ''; // here we emptied the value for the ref so the user can type another input
-      this.props.onAddTodo(todoText); // here we pass in the user's input to the onAddTodo function which comes from the parent component
+      this.refs.todoText.value = '';
+      dispatch(actions.addTodo(todoText));
     } else {
-      this.refs.todoText.focus(); // here we bring the cursor's focus back to the input field so the user can type something else
+      this.refs.todoText.focus();
     }
   }, // render value is a function that returns some jsx to be rendered
   render: function () {
@@ -24,4 +27,4 @@ var AddTodo = React.createClass({
   }
 });
 
-module.exports = AddTodo;
+export default connect()(AddTodo);
