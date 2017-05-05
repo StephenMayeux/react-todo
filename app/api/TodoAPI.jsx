@@ -12,7 +12,7 @@ module.exports = {
     var todos = [];
 
     try {
-      todos = JSON.parse(stringTodos); // not sure I understand this part. Research this
+      todos = JSON.parse(stringTodos); 
     } catch (e) {
 
     }
