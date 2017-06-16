@@ -8,7 +8,7 @@
     "start": "node server.js",
     "build": "webpack --config webpack.config.js"
   },
-  "author": "Andrew Mead",
+  "author": "Luis Diaz",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.9.1",
