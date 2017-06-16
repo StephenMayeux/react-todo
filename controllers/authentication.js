@@ -9,6 +9,8 @@ function tokenForUser(user) { // make token by encoding user info with our salt/
 
 exports.signin = function(req, res, next) { // give user their identifying token
   // token lets them access hidden routes and data pertaining to them
+  // the done() call provide by passport stores the returned user in req.user
+  // done(null, user) on line 21 of passport.js
   res.send({ token: tokenForUser(req.user), user: req.user });
 }
 
