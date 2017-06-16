@@ -7,27 +7,30 @@ const LocalStrategy = require('passport-local');
 // Create local strategy
 const localOptions = { usernameField: 'email' };
 const localLogin = new LocalStrategy(localOptions, function(email, password, done) {
-  User.findOne({ email: email }, function(err, user) {
+  User.findOne({ email: email }, function(err, user) { // looks for user email in db
     if (err) { return done(err); }
     if (!user) { return done(null, false); }
-
+// if no error or user is found then compare password with instance method
+// UserSchema.methods.comparePassword = ...
     user.comparePassword(password, function(err, isMatch) {
       if (err) { return done(err); }
       if (!isMatch) { return done(null, false); }
-
+      // if error is null and the password matches then make call to done with user
       return done(null, user);
     });
   });
 });
 
 // Setup options for JWT Strategy
-const jwtOptions = {
+const jwtOptions = { // tell strategy where to look for the token
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  // look in the header named 'authorization' and use this secret/key to decode it
   secretOrKey: process.env.SECRET
 };
 
 // Create JWT strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
+  // check database for user.id aka payload.sub (authentication.js controller)
   User.findById(payload.sub, function(err, user) {
     if (err) { return done(err, false); }
 
