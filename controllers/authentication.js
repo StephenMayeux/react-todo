@@ -1,5 +1,5 @@
 const jwt = require('jwt-simple');
-const User = require('../models/user');
+const User = require('../models/User');
 
 function tokenForUser(user) { // make token by encoding user info with our salt/secret
   // we can later verify tokens with user info and our stored secret

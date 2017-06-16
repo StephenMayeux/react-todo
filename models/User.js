@@ -23,8 +23,9 @@ userSchema.pre('save', function(next) {
     });
   });
 });
-
+// in the passport strategy, this method will be called with user password and a cb
 userSchema.methods.comparePassword = function(candidatePassword, callback) {
+  // bcrypt compares passwords and calls provided callback function with result
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
     if (err) { return callback(err); }
 
